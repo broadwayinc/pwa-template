@@ -18,6 +18,21 @@
     <br>
     <br>
 
+    <h2>Triggers</h2>
+    <hr>
+    <br>
+    <button id="triggerNotification" onclick="
+        navigator.serviceWorker.ready.then(async (registration) => {
+            const permission = await Notification.requestPermission(); // ask for notification permission
+            registration.showNotification('Hello Skapi!', {
+                body: 'Message Body',
+                icon: 'icon-192x192.png',
+                badge: 'icon-192x192.png'
+            })
+        });
+    ">Trigger Notification</button>
+
+
     <h2>Subscribe to Notifications</h2>
     <hr>
     <br>
