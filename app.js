@@ -38,13 +38,16 @@ document.getElementById('subscribeButton').addEventListener('click', async () =>
     }
 
     // Send the subscription object to your server
-    await fetch(subsEndpoint, {
+    let resp = await fetch(subsEndpoint, {
         method: 'POST',
         body: JSON.stringify(subscription),
         headers: {
             'Content-Type': 'application/json'
         }
     });
+
+    console.log('-- server response --');
+    console.log(resp);
 });
 
 function urlBase64ToUint8Array(base64String) {
