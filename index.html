@@ -12,10 +12,15 @@
 <body>
     <h1>Simple PWA with Push Notifications</h1>
 
-    <button id="install" hidden>Install</button>
+    <button id="install" hidden>Install PWA</button>
 
     <br>
+    <br>
+    <br>
 
+    <h2>Subscribe to Notifications</h2>
+    <hr>
+    <br>
     <input type="url" id="subscription_endpoint" placeholder="https://gateway.api.com">
     <br>
     <br>
@@ -24,6 +29,11 @@
     <br>
     <button id="subscribeButton">Subscribe to Notifications</button>
 
+    <br>
+    <br>
+    <br>
+
+    <h2>Notification JSON structure</h2>
     <hr>
 
     <pre>
@@ -33,7 +43,7 @@ When sending notifications, send me in this format:
     "body": "Notification Message"
 }
     </pre>
-    
+
     <script src="app.js"></script>
     <script src="main.js"></script>
 </body>
