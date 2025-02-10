@@ -6,7 +6,7 @@ self.addEventListener('push', function(event) {
         icon: 'icon-192x192.png',
         badge: 'icon-192x192.png'
     };
-
+    
     event.waitUntil(
         self.registration.showNotification(title, options)
     );
