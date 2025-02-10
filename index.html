@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Simple PWA with Push Notifications</title>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <h1>Simple PWA with Push Notifications</h1>
+    
+    <input type="url" id="subscription_endpoint" placeholder="https://gateway.api.com">
+    <br>
+    <br>
+    <input type="text" id="public_vapid_key" placeholder="PUBLIC_VAPID_KEY">
+    <br>
+    <br>
+    <button id="subscribeButton">Subscribe to Notifications</button>
+
+    <hr>
+
+    <pre>
+When sending notifications, send me in this format:
+{
+    "title": "Notification Title",
+    "body": "Notification Message"
+}
+    </pre>
+    <script src="app.js"></script>
+</body>
+</html>

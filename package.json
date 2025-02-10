@@ -1,0 +1,15 @@
+{
+  "name": "pwa-template",
+  "version": "1.0.0",
+  "description": "Simple example of PWA application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx bns 3333"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "basic-node-server": "^1.0.11"
+  }
+}
