@@ -32,22 +32,25 @@ document.getElementById('subscribeButton').addEventListener('click', async () =>
     console.log('Push subscription:', subscription);
     let subsEndpoint = document.getElementById('subscription_endpoint').value;
 
-    if(!subsEndpoint) {
+    if (!subsEndpoint) {
         alert('Subscription endpoint is required for push notifications');
         return;
     }
 
+    let service_id = document.getElementById('serviceId').value;
+    let owners_id = document.getElementById('ownersId').value;
+
     // Send the subscription object to your server
     let resp = await fetch(subsEndpoint, {
         method: 'POST',
-        body: JSON.stringify(subscription),
+        body: Object.assign({ service: service_id, owner: owners_id }, JSON.stringify(subscription)),
         headers: {
             'Content-Type': 'application/json'
         }
     });
 
     console.log('-- server response --');
-    console.log(resp);
+    console.log(await resp.json());
 });
 
 function urlBase64ToUint8Array(base64String) {
