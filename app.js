@@ -24,12 +24,13 @@ document.getElementById('subscribeButton').addEventListener('click', async () =>
         return;
     }
     // Subscribe to push notifications
-    const subscription = await registration.pushManager.subscribe({
+    const subscription = (await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(vapid)
-    });
+    })).toJSON();
 
     console.log('Push subscription:', subscription);
+
     let subsEndpoint = document.getElementById('subscription_endpoint').value;
 
     if (!subsEndpoint) {
@@ -39,11 +40,17 @@ document.getElementById('subscribeButton').addEventListener('click', async () =>
 
     let service_id = document.getElementById('serviceId').value;
     let owners_id = document.getElementById('ownersId').value;
+    let device_id = document.getElementById('deviceId').value;
+
+    if (!service_id || !owners_id || !device_id) {
+        alert('Service ID, Owners ID, and Device ID are required for push notifications');
+        return;
+    }
 
     // Send the subscription object to your server
     let resp = await fetch(subsEndpoint, {
         method: 'POST',
-        body: JSON.stringify(Object.assign({ service: service_id, owner: owners_id }, {endpoint: subscription.endpoint})),
+        body: JSON.stringify(Object.assign({ service: service_id, owner: owners_id }, subscription, { device_id })),
         headers: {
             'Content-Type': 'application/json'
         }

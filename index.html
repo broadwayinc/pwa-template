@@ -32,21 +32,57 @@
         });
     ">Trigger Notification</button>
 
+    <br>
+    <br>
+    <br>
 
     <h2>Subscribe to Notifications</h2>
+
     <hr>
+
     <br>
-    <input type="text" id="serviceId" placeholder="SERVICE_ID">
-    <input type="text" id="ownersId" placeholder="OWNERS_ID">
+
+    <input type="text" id="serviceId" placeholder="SERVICE_ID" value="ap22cNakKB2xXgYcxgfg">
+    <input type="text" id="ownersId" placeholder="OWNERS_ID" value="240894f8-b091-7043-1a49-28f4eebd79a8">
     <br>
     <br>
-    <input type="url" id="subscription_endpoint" placeholder="https://gateway.api.com">
+    <input type="url" id="subscription_endpoint" placeholder="https://gateway.api.com"
+        value="https://02q3412exl.execute-api.ap-northeast-2.amazonaws.com/api/store-subscription">
     <br>
     <br>
     <input type="text" id="public_vapid_key" placeholder="PUBLIC_VAPID_KEY">
     <br>
     <br>
+    
+    <input type="text" id="deviceId" placeholder="device id">
+
+    <br>
+    <br>
+
     <button id="subscribeButton">Subscribe to Notifications</button>
+
+    <br>
+    <br>
+    <br>
+
+    <h2>Unsubscribe to Notifications</h2>
+    <hr>
+    <br>
+    <button id="unsubscribeButton" onclick="unsubscribeUser()">Unsubscribe to Notifications</button>
+    <script>
+        // Unsubscribe the user
+        async function unsubscribeUser() {
+            const registration = await navigator.serviceWorker.ready;
+            const subscription = await registration.pushManager.getSubscription();
+
+            if (subscription) {
+                await subscription.unsubscribe();
+                alert('User unsubscribed successfully.');
+            } else {
+                alert('No subscription found.');
+            }
+        }
+    </script>
 
     <br>
     <br>
@@ -62,6 +98,48 @@ When sending notifications, send me in this format:
     "body": "Notification Message"
 }
     </pre>
+
+    <br>
+    <br>
+    <br>
+
+    <h2>Request Test</h2>
+    <hr>
+    <br>
+    <input type="text" id="requestUrl" placeholder="Request URL"
+        value="https://02q3412exl.execute-api.ap-northeast-2.amazonaws.com/api/push-noti">
+    <br>
+    <br>
+    <textarea id="jsonbox" cols="60" rows="30"></textarea>
+    <br>
+    <br>
+    <button id="sendRequest">Send Request</button>
+
+    <script>
+        document.getElementById('sendRequest').addEventListener('click', async () => {
+            const url = document.getElementById('requestUrl').value;
+            const json = document.getElementById('jsonbox').value;
+
+            try {
+                JSON.parse(json);
+            } catch (error) {
+                alert('Invalid JSON');
+                return;
+            }
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: json
+            });
+
+            const data = await response.json();
+            console.log(data);
+        });
+
+    </script>
 
     <script src="app.js"></script>
     <script src="main.js"></script>
