@@ -43,7 +43,7 @@ document.getElementById('subscribeButton').addEventListener('click', async () =>
     // Send the subscription object to your server
     let resp = await fetch(subsEndpoint, {
         method: 'POST',
-        body: Object.assign({ service: service_id, owner: owners_id }, JSON.stringify(subscription)),
+        body: JSON.stringify(Object.assign({ service: service_id, owner: owners_id }, {endpoint: subscription.endpoint})),
         headers: {
             'Content-Type': 'application/json'
         }
